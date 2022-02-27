@@ -1,0 +1,70 @@
+.container {
+  font-family: "Combo", cursive;
+}
+
+/* Header */
+#title {
+  text-align: center;
+  font-family: "Cedarville Cursive", cursive;
+  margin-bottom: 20px;
+}
+
+#level {
+  text-align: center;
+}
+
+/* Main */
+main {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-evenly; */
+}
+
+/* Options */
+aside {
+  margin-right: 50px;
+}
+
+li {
+  list-style-type: none;
+}
+
+/* Squares */
+
+#squares {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  /* margin-left: ; */
+}
+
+#question,
+#guess {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-evenly; */
+}
+
+#questionsquares,
+#guesssquares {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-evenly; */
+}
+.col-md-2 {
+  border: 1px solid black;
+  height: 8em;
+  width: 8em;
+  margin-bottom: 30px;
+}
+
+/* Buttons */
+button {
+  font-size: larger;
+}
+
+#buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 25px;
+}
