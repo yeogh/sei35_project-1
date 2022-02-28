@@ -1,20 +1,3 @@
-// const qnBox1 = {
-//   color: null,
-//   number: null,
-// };
-// const qnBox2 = {
-//   color: null,
-//   number: null,
-// };
-// const qnBox3 = {
-//   color: null,
-//   number: null,
-// };
-// const qnBox4 = {
-//   color: null,
-//   number: null,
-// };
-
 let colorArr = ["red", "yellow", "blue", "green"];
 let numArr = [1, 2];
 
@@ -57,12 +40,12 @@ randomColor();
 randomNum();
 // hideQnShowAttempt();
 
+//Drag and drop reference https://jsfiddle.net/dzsk7311/4/
 function allowDrop(ev) {
   ev.preventDefault();
 }
 
 function drag(ev) {
-  //   this.style.opacity = "0.4";
   ev.dataTransfer.setData("text", ev.target.id);
 }
 
@@ -73,7 +56,6 @@ function removeNode(node) {
 function drop(ev) {
   ev.preventDefault();
   let data = ev.dataTransfer.getData("text");
-  //   ev.target.appendChild(document.getElementById(data));
   let isOptionNum =
     "dragone" == data ||
     "dragtwo" == data ||
@@ -87,18 +69,19 @@ function drop(ev) {
   //     "dragblue" == data ||
   //     "draggreen" == data;
   let nodeCopy = document.getElementById(data).cloneNode(true);
-  nodeCopy.id = "col" + ev.target.id;
-  if (isOptionNum) {
-    if (ev.target.nodeName == "li") {
-      ev.target.parentNode.appendChild(nodeCopy);
-      removeNode(ev.target);
-    } else ev.target.appendChild(nodeCopy);
-  } else {
-    if (ev.target.nodeName != "li") {
-      removeNode(document.getElementById(data));
-      ev.target.appendChild(nodeCopy);
-    }
-  }
+
+  ev.target.appendChild(nodeCopy);
+  //   if (isOptionNum) {
+  //     if (ev.target.nodeName == "li") {
+  //       ev.target.parentNode.appendChild(nodeCopy);
+  //       removeNode(ev.target);
+  //     } else ev.target.appendChild(nodeCopy);
+  //   } else {
+  //     if (ev.target.nodeName != "li") {
+  //       removeNode(document.getElementById(data));
+  //       ev.target.appendChild(nodeCopy);
+  //     }
+  //   }
   //   if (isOptionCol) {
   //     if (ev.target.nodeName == "li") {
   //       ev.target.parentNode.appendChild(nodeCopy);
@@ -112,31 +95,4 @@ function drop(ev) {
   ev.stopPropagation();
   return false;
 }
-// }
-// function drop(ev) {
-//   ev.preventDefault();
-//   let data = ev.dataTransfer.getData("text");
-//   //   ev.target.appendChild(document.getElementById(data));
-//   let isOption =
-//     "dragone" == data ||
-//     "dragtwo" == data ||
-//     "dragred" == data ||
-//     "dragyellow" == data ||
-//     "dragblue" == data ||
-//     "draggreen" == data;
-//   let nodeCopy = document.getElementById(data).cloneNode(true);
-//   nodeCopy.id = "col" + ev.target.id;
-//   if (isOption) {
-//     if (ev.target.nodeName == "li") {
-//       ev.target.parentNode.appendChild(nodeCopy);
-//       removeNode(ev.target);
-//     } else ev.target.appendChild(nodeCopy);
-//   } else {
-//     if (ev.target.nodeName != "li") {
-//       removeNode(document.getElementById(data));
-//       ev.target.appendChild(nodeCopy);
-//     }
-//   }
-//   ev.stopPropagation();
-//   return false;
 // }
