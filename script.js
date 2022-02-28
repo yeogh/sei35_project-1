@@ -74,12 +74,18 @@ function drop(ev) {
   ev.preventDefault();
   let data = ev.dataTransfer.getData("text");
   //   ev.target.appendChild(document.getElementById(data));
-  let isOptionNum = "dragone" == data || "dragtwo" == data;
-  let isOptionCol =
+  let isOptionNum =
+    "dragone" == data ||
+    "dragtwo" == data ||
     "dragred" == data ||
     "dragyellow" == data ||
     "dragblue" == data ||
     "draggreen" == data;
+  //   let isOptionCol =
+  //     "dragred" == data ||
+  //     "dragyellow" == data ||
+  //     "dragblue" == data ||
+  //     "draggreen" == data;
   let nodeCopy = document.getElementById(data).cloneNode(true);
   nodeCopy.id = "col" + ev.target.id;
   if (isOptionNum) {
