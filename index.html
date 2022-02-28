@@ -23,76 +23,62 @@
     </header>
     <body>
       <main>
-        <aside>
+        <aside id="option">
           <h4><strong>Options</strong></h4>
           <div id="colour">
             <h5>Colours</h5>
             <ul>
-              <li>Red</li>
-              <li>Yellow</li>
-              <li>Blue</li>
-              <li>Green</li>
+              <li class="colour red" id="dragred" draggable="true" ondragstart="drag(event)">Red</li>
+              <li class="colour yellow" id="dragyellow" draggable="true" ondragstart="drag(event)">Yellow</li>
+              <li class="colour blue" id="dragblue" draggable="true" ondragstart="drag(event)">Blue</li>
+              <li class="colour green" id="draggreen" draggable="true" ondragstart="drag(event)">Green</li>
             </ul>          
           </div>
           <div id="number">
             <h5>Number</h5>
             <ul>
-              <li>1</li>
-              <li>2</li>
+              <li class="number" id="dragone" draggable="true" ondragstart="drag(event)">1</li>
+              <li class="number" id="dragtwo" draggable="true" ondragstart="drag(event)">2</li>
             </ul>
           </div>
         </aside>
-        <div id="squares">
-          <section id="question">
-            <h4><strong>Challenge</strong></h4>
-            <div id="questionsquares">
-            <div class="col-md-2 square1">square 1</div>
-            <div class="col-md-1 gap"></div>
-            <div class="col-md-2 square2">square 2</div>
-            <div class="col-md-1 gap"></div>
-            <div class="col-md-2 square3">square 3</div>
-            <div class="col-md-1 gap"></div>
-            <div class="col-md-2 square4">square 4</div>
-            <div class="col-md-1 gap"></div>
-          </div>
-        </section>
-        <section id="guess">
-          <h4><strong>According to your memory...</strong></h4>
-          <div id="guesssquares">
-          <div class="col-md-2 square1">square 1</div>
-            <div class="col-md-1 gap"></div>
-            <div class="col-md-2 square2">square 2</div>
-            <div class="col-md-1 gap"></div>
-            <div class="col-md-2 square3">square 3</div>
-            <div class="col-md-1 gap"></div>
-            <div class="col-md-2 square4">square 4</div>
-            <div class="col-md-1 gap"></div>
-          </div>
+        <div id="middle">
+          <div id="squares">
+            <section id="question">
+              <h4><strong>Challenge</strong></h4>
+              <div id="questionsquares">
+                <div class="col-md-2 square1 randomqn" id="qnsquare1">square 1</div>
+                <div class="col-md-1 gap"></div>
+                <div class="col-md-2 square2 randomqn" id="qnsquare2">square 2</div>
+                <div class="col-md-1 gap"></div>
+                <div class="col-md-2 square3 randomqn" id="qnsquare3">square 3</div>
+                <div class="col-md-1 gap"></div>
+                <div class="col-md-2 square4 randomqn" id="qnsquare4">square 4</div>
+                <div class="col-md-1 gap"></div>
+            </div>
           </section>
+          <section id="guess">
+            <h4><strong>Your turn...</strong></h4>
+            <div id="guesssquares">
+              <div class="col-md-2 square1" id="anssq1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+              <div class="col-md-1 gap"></div>
+              <div class="col-md-2 square2" id="anssq2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+              <div class="col-md-1 gap"></div>
+              <div class="col-md-2 square3" id="anssq3" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+              <div class="col-md-1 gap"></div>
+              <div class="col-md-2 square4" id="anssq4" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+              <div class="col-md-1 gap"></div>
+            </div>
+            </section>
+          </div>
+      
+        <section id="buttons">
+          <button class="button" id="reset"><strong>Reset</strong></button>
+          <button class="button" id="submit"><strong>Submit</strong></button>
+        </section>
         </div>
       </main>
-      <section id="buttons">
-        <button class="button" id="reset"><strong>Reset</strong></button>
-        <button class="button" id="submit"><strong>Submit</strong></button>
-      </section>
       <script src="script.js" charset="utf-8"></script>
     </body>
   </div>
 </html>
-
-<!-- 4 means how many columns -->
-<!-- <div class="container">
-      <div class="row">
-        <div class="col-md-6 solid-black">col</div>
-          <div class="row">
-            <div class="col-md-6 solid-black">col</div>
-            <div class="col-md-6 solid-black">col</div>
-        </div>
-        <div class="col-md-6 solid-black">col</div>
-          <div class="row">
-            <div class="col-md-6 solid-black">col</div>
-            <div class="col-md-6 solid-black">col</div>
-      </div>
-    </div>
-
-    <button type="button" class="btn btn-primary">Primary</button> -->
