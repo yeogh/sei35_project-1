@@ -11,73 +11,183 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Combo&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Combo&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <div class="container">
     <header>
       <h1 id="title">The Match</h1>
-      <h4 id="level"><strong>Level</strong></h5>
+      <button class="button buttontop" id="startagain-initial">
+        <strong>New Game</strong>
+      </button>
+      <h4 id="level"><strong>Level</strong></h4>
     </header>
     <body>
       <main>
-        <aside id="option">
-          <h4><strong>Options</strong></h4>
-          <div id="colour">
-            <h5>Colours</h5>
-            <ul>
-              <li class="colour red" id="dragred" draggable="true" ondragstart="drag(event)">Red</li>
-              <li class="colour yellow" id="dragyellow" draggable="true" ondragstart="drag(event)">Yellow</li>
-              <li class="colour blue" id="dragblue" draggable="true" ondragstart="drag(event)">Blue</li>
-              <li class="colour green" id="draggreen" draggable="true" ondragstart="drag(event)">Green</li>
-            </ul>          
-          </div>
-          <div id="number">
-            <h5>Number</h5>
-            <ul>
-              <li class="number" id="dragone" draggable="true" ondragstart="drag(event)">1</li>
-              <li class="number" id="dragtwo" draggable="true" ondragstart="drag(event)">2</li>
-            </ul>
-          </div>
+        <aside>
+          <section id="buttons-top">
+            <button class="button buttontop" id="startagain">
+              <strong>New Game</strong>
+            </button>
+            <button class="button buttontop" id="next">
+              <strong>Next Challenge</strong>
+            </button>
+          </section>
+          <section id="option">
+            <h5>
+              <strong>Options</strong>
+            </h5>
+            <h5>
+              <span
+                data-bs-toggle="tooltip"
+                data-bs-placement="right"
+                title="Drag-and-drop your colour and number
+                combi selection to each of the empty boxes below"
+                >(Hover here for instruction)</span
+              >
+            </h5>
+            <div id="colour">
+              <h5>Colour</h5>
+              <ul>
+                <li
+                  class="colour red"
+                  id="dragred"
+                  draggable="true"
+                  ondragstart="drag(event)"
+                >
+                  Red
+                </li>
+                <li
+                  class="colour yellow"
+                  id="dragyellow"
+                  draggable="true"
+                  ondragstart="drag(event)"
+                >
+                  Yellow
+                </li>
+                <li
+                  class="colour blue"
+                  id="dragblue"
+                  draggable="true"
+                  ondragstart="drag(event)"
+                >
+                  Blue
+                </li>
+                <li
+                  class="colour green"
+                  id="draggreen"
+                  draggable="true"
+                  ondragstart="drag(event)"
+                >
+                  Green
+                </li>
+              </ul>
+            </div>
+            <div id="number">
+              <h5>Number</h5>
+              <ul>
+                <li
+                  class="number"
+                  id="dragone"
+                  draggable="true"
+                  ondragstart="drag(event)"
+                >
+                  <nobr>1</nobr>
+                </li>
+                <li
+                  class="number"
+                  id="dragtwo"
+                  draggable="true"
+                  ondragstart="drag(event)"
+                >
+                  <nobr>2</nobr>
+                </li>
+              </ul>
+            </div>
+            <p id="reference">
+              <em
+                >Reference: Drag and drop reference
+                https://jsfiddle.net/dzsk7311/4/</em
+              >
+            </p>
+          </section>
         </aside>
         <div id="middle">
+          <h4 id="result"></h4>
           <div id="squares">
             <section id="question">
-              <h4><strong>Challenge</strong></h4>
+              <h5><strong>Challenge</strong></h5>
               <div id="questionsquares">
-                <div class="col-md-2 square1 randomqn" id="qnsquare1">square 1</div>
+                <div class="col-md-2 square1 randomqn" id="qnsquare1">
+                  square 1
+                </div>
                 <div class="col-md-1 gap"></div>
-                <div class="col-md-2 square2 randomqn" id="qnsquare2">square 2</div>
+                <div class="col-md-2 square2 randomqn" id="qnsquare2">
+                  square 2
+                </div>
                 <div class="col-md-1 gap"></div>
-                <div class="col-md-2 square3 randomqn" id="qnsquare3">square 3</div>
+                <div class="col-md-2 square3 randomqn" id="qnsquare3">
+                  square 3
+                </div>
                 <div class="col-md-1 gap"></div>
-                <div class="col-md-2 square4 randomqn" id="qnsquare4">square 4</div>
+                <div class="col-md-2 square4 randomqn" id="qnsquare4">
+                  square 4
+                </div>
                 <div class="col-md-1 gap"></div>
-            </div>
-          </section>
-          <section id="guess">
-            <h4><strong>Your turn...</strong></h4>
-            <div id="guesssquares">
-              <div class="col-md-2 square1" id="anssq1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-              <div class="col-md-1 gap"></div>
-              <div class="col-md-2 square2" id="anssq2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-              <div class="col-md-1 gap"></div>
-              <div class="col-md-2 square3" id="anssq3" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-              <div class="col-md-1 gap"></div>
-              <div class="col-md-2 square4" id="anssq4" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-              <div class="col-md-1 gap"></div>
-            </div>
+              </div>
+            </section>
+            <section id="guess">
+              <h5><strong>Your turn...</strong></h5>
+              <div id="guesssquares">
+                <div
+                  class="col-md-2 square1 answer"
+                  id="anssq1"
+                  ondrop="drop(event)"
+                  ondragover="allowDrop(event)"
+                ></div>
+                <div class="col-md-1 gap"></div>
+                <div
+                  class="col-md-2 square2 answer"
+                  id="anssq2"
+                  ondrop="drop(event)"
+                  ondragover="allowDrop(event)"
+                ></div>
+                <div class="col-md-1 gap"></div>
+                <div
+                  class="col-md-2 square3 answer"
+                  id="anssq3"
+                  ondrop="drop(event)"
+                  ondragover="allowDrop(event)"
+                ></div>
+                <div class="col-md-1 gap"></div>
+                <div
+                  class="col-md-2 square4 answer"
+                  id="anssq4"
+                  ondrop="drop(event)"
+                  ondragover="allowDrop(event)"
+                ></div>
+                <div class="col-md-1 gap"></div>
+              </div>
             </section>
           </div>
-      
-        <section id="buttons">
-          <button class="button" id="reset"><strong>Reset</strong></button>
-          <button class="button" id="submit"><strong>Submit</strong></button>
-        </section>
+
+          <section id="buttons-bottom">
+            <button class="button buttonbottom" id="reset">
+              <strong>Reset</strong>
+            </button>
+            <button class="button buttonbottom" id="submit">
+              <strong>Verify Result</strong>
+            </button>
+          </section>
         </div>
       </main>
+
       <script src="script.js" charset="utf-8"></script>
     </body>
   </div>
