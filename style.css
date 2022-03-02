@@ -83,6 +83,10 @@ li {
   margin-left: 50px;
 }
 
+#countdown {
+  color: red;
+}
+
 #squares {
   display: flex;
   flex-direction: column;

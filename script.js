@@ -14,12 +14,14 @@ function hideAttemptShowQn() {
   document.getElementById("guess").style.visibility = "hidden";
   document.getElementById("option").style.visibility = "hidden";
   document.getElementById("buttons-bottom").style.visibility = "hidden";
+  document.getElementById("reset").style.visibility = "hidden";
   document.getElementById("result").style.visibility = "hidden";
   document.getElementById("level").style.visibility = "hidden";
   document.getElementById("next").style.visibility = "hidden";
   document.getElementById("startagain-initial").style.visibility = "hidden";
   document.getElementById("startagain").style.visibility = "visible";
   document.getElementById("question").style.visibility = "visible";
+  document.getElementById("countdown").style.visibility = "visible";
   resetQns();
   randomColor();
   randomNum();
@@ -29,6 +31,7 @@ function hideAttemptShowQn() {
 function hideQnShowAttempt() {
   document.getElementById("startagain-initial").style.visibility = "hidden";
   document.getElementById("question").style.visibility = "hidden";
+  document.getElementById("countdown").style.visibility = "hidden";
   document.getElementById("guess").style.visibility = "visible";
   document.getElementById("option").style.visibility = "visible";
   document.getElementById("buttons-bottom").style.visibility = "visible";
@@ -36,6 +39,7 @@ function hideQnShowAttempt() {
   document.getElementById("level").style.visibility = "visible";
   document.getElementById("next").style.visibility = "visible";
   document.getElementById("startagain").style.visibility = "visible";
+  document.getElementById("reset").style.visibility = "visible";
 }
 
 //On Windows Load
@@ -49,6 +53,9 @@ document
 function newGame() {
   hideAttemptShowQn();
   setTimeout(hideQnShowAttempt, 5000);
+  scoreText = 0;
+  score.innerText = `Score: ${scoreText}`;
+  timer();
 }
 
 document.querySelector("#startagain").addEventListener("click", newGame);
@@ -59,7 +66,25 @@ function nextChallenge() {
   setTimeout(hideQnShowAttempt, 5000);
 }
 
-document.querySelector("#next").addEventListener("click", newGame);
+document.querySelector("#next").addEventListener("click", nextChallenge);
+
+//Countdown
+let countdown = document.getElementById("countdown");
+let time = 5;
+let duration = 0;
+countdown.innerText = "(Your turn in 5 secs)";
+
+function timer() {
+  for (let t = 0; t < time; t++) {
+    duration += 1000;
+    time--;
+    setTimeout(countdownText, duration);
+  }
+}
+
+function countdownText() {
+  countdown.innerText = `(Your turn in ${time} secs)`;
+}
 
 //Challenge
 let colorArr = ["red", "yellow", "blue", "green"];
@@ -108,11 +133,6 @@ function drop(ev) {
   return false;
 }
 
-//Score
-let score = document.getElementById("level");
-let scoreText = 0;
-score.innerText = `Score: ${scoreText}`;
-
 // Reset Questions
 const randomQns = document.getElementsByClassName("randomqn");
 
@@ -133,9 +153,15 @@ function resetAnswer() {
     answers[j].classList.remove("red", "yellow", "blue", "green");
   }
   document.getElementById("result").innerText = "";
+  attemptArr.length = 0;
 }
 
 document.querySelector("#reset").addEventListener("click", resetAnswer);
+
+//Score
+let score = document.getElementById("level");
+let scoreText = 0;
+score.innerText = `Score: ${scoreText}`;
 
 //Verify Result
 let attempt = document.querySelector("#result");
@@ -143,6 +169,7 @@ let attemptArr = [];
 
 function compareResult() {
   document.getElementById("question").style.visibility = "visible";
+  document.getElementById("reset").style.visibility = "hidden";
   for (let k = 1; k < 5; k++) {
     let ansClasses = document.getElementById(`anssq${k}`).classList;
     if (
@@ -152,12 +179,8 @@ function compareResult() {
         document.getElementById(`anssq${k}`).innerText.trim()
     ) {
       attemptArr.push("correct");
-      //   console.log(document.getElementById("anssq1").innerText.trim());
-      //   console.log(document.getElementById("qnsquare1").innerText);
     } else {
       attemptArr.push("incorrect");
-      //   console.log(document.getElementById("anssq1").innerText.trim());
-      //   console.log(document.getElementById("qnsquare1").innerText);
     }
   }
   function checkAttempt(element) {
@@ -170,15 +193,82 @@ function compareResult() {
     attempt.innerText =
       "Awesome! That's perfect memory. Go try the next challenge.";
     scoreText += 10;
-    return attempt;
+    score.innerText = `Score: ${scoreText}`;
+    // return { attempt, scoreText };
   } else {
     attempt.innerText =
       "Opps, not exactly right. Try the next challenge. You've got this!";
-    return attempt;
+    // return attempt;
   }
 }
 
-document.querySelector("#submit").addEventListener("click", compareResult);
+document.querySelector("#submit").addEventListener("click", compareResultV2);
+
+function compareResultV2() {
+  document.getElementById("question").style.visibility = "visible";
+  document.getElementById("reset").style.visibility = "hidden";
+  for (let k = 1; k < 5; k++) {
+    let ansClasses = document.getElementById(`anssq${k}`).classList;
+    if (
+      document.getElementById(`qnsquare${k}`).classList[3] ===
+        ansClasses.item(ansClasses.length - 1) &&
+      document.getElementById(`qnsquare${k}`).innerText ===
+        document.getElementById(`anssq${k}`).innerText.trim()
+    ) {
+      attemptArr.push("correct");
+    } else if (
+      document.getElementById(`qnsquare${k}`).classList[3] ===
+      ansClasses.item(ansClasses.length - 1)
+    ) {
+      attemptArr.push("correctcol");
+    } else if (
+      document.getElementById(`qnsquare${k}`).innerText ===
+      document.getElementById(`anssq${k}`).innerText.trim()
+    ) {
+      attemptArr.push("correctnum");
+    } else {
+      attemptArr.push("incorrect");
+    }
+  }
+
+  function checkAttempt(element) {
+    return element === "correct";
+  }
+
+  function checkAttemptCol(element) {
+    return element === "correctcol";
+  }
+
+  function checkAttemptNum(element) {
+    return element === "correctnum";
+  }
+  // console.log(attemptArr);
+  // console.log(attemptArr.every(checkAttempt));
+
+  if (attemptArr.every(checkAttempt) === true) {
+    attempt.innerText =
+      "Awesome! That's perfect memory. Go try the next challenge.";
+    scoreText += 10;
+    score.innerText = `Score: ${scoreText}`;
+    // return { attempt, scoreText };
+  } else if (attemptArr.every(checkAttemptCol) === true) {
+    attempt.innerText =
+      "Colour perfect! 5 points for that. Just abit more to go for next challenge";
+    scoreText += 5;
+    score.innerText = `Score: ${scoreText}`;
+  } else if (attemptArr.every(checkAttemptNum) === true) {
+    attempt.innerText =
+      "You are good with numbers. 5 points for that.Cant wait to see the colour match for next challenge";
+    scoreText += 5;
+    score.innerText = `Score: ${scoreText}`;
+  } else {
+    attempt.innerText =
+      "Opps, not exactly right. Try the next challenge. You've got this!";
+    // return attempt;
+  }
+}
+
+// document.querySelector("#submit").addEventListener("click", compareResult);
 
 //Tooltip
 var tooltipTriggerList = [].slice.call(
