@@ -18,7 +18,7 @@ function hideAttemptShowQn() {
   document.getElementById("result").style.visibility = "hidden";
   document.getElementById("level").style.visibility = "hidden";
   document.getElementById("next").style.visibility = "hidden";
-  document.getElementById("startagain-initial").style.visibility = "hidden";
+  document.getElementById("gamebrief").style.visibility = "hidden";
   document.getElementById("startagain").style.visibility = "visible";
   document.getElementById("question").style.visibility = "visible";
   document.getElementById("countdown").style.visibility = "visible";
@@ -29,7 +29,7 @@ function hideAttemptShowQn() {
 }
 
 function hideQnShowAttempt() {
-  document.getElementById("startagain-initial").style.visibility = "hidden";
+  document.getElementById("gamebrief").style.visibility = "hidden";
   document.getElementById("question").style.visibility = "hidden";
   document.getElementById("countdown").style.visibility = "hidden";
   document.getElementById("guess").style.visibility = "visible";
@@ -74,16 +74,16 @@ let time = 5;
 let duration = 0;
 countdown.innerText = "(Your turn in 5 secs)";
 
+function countdownText() {
+  countdown.innerText = `(Your turn in ${time} secs)`;
+}
+
 function timer() {
   for (let t = 0; t < time; t++) {
     duration += 1000;
-    time--;
+    time -= 1;
     setTimeout(countdownText, duration);
   }
-}
-
-function countdownText() {
-  countdown.innerText = `(Your turn in ${time} secs)`;
 }
 
 //Challenge
@@ -167,40 +167,38 @@ score.innerText = `Score: ${scoreText}`;
 let attempt = document.querySelector("#result");
 let attemptArr = [];
 
-function compareResult() {
-  document.getElementById("question").style.visibility = "visible";
-  document.getElementById("reset").style.visibility = "hidden";
-  for (let k = 1; k < 5; k++) {
-    let ansClasses = document.getElementById(`anssq${k}`).classList;
-    if (
-      document.getElementById(`qnsquare${k}`).classList[3] ===
-        ansClasses.item(ansClasses.length - 1) &&
-      document.getElementById(`qnsquare${k}`).innerText ===
-        document.getElementById(`anssq${k}`).innerText.trim()
-    ) {
-      attemptArr.push("correct");
-    } else {
-      attemptArr.push("incorrect");
-    }
-  }
-  function checkAttempt(element) {
-    return element === "correct";
-  }
-  console.log(attemptArr);
-  console.log(attemptArr.every(checkAttempt));
+// function compareResult() {
+//   document.getElementById("question").style.visibility = "visible";
+//   document.getElementById("reset").style.visibility = "hidden";
+//   for (let k = 1; k < 5; k++) {
+//     let ansClasses = document.getElementById(`anssq${k}`).classList;
+//     if (
+//       document.getElementById(`qnsquare${k}`).classList[3] ===
+//         ansClasses.item(ansClasses.length - 1) &&
+//       document.getElementById(`qnsquare${k}`).innerText ===
+//         document.getElementById(`anssq${k}`).innerText.trim()
+//     ) {
+//       attemptArr.push("correct");
+//     } else {
+//       attemptArr.push("incorrect");
+//     }
+//   }
+//   function checkAttempt(element) {
+//     return element === "correct";
+//   }
+//   console.log(attemptArr);
+//   console.log(attemptArr.every(checkAttempt));
 
-  if (attemptArr.every(checkAttempt) === true) {
-    attempt.innerText =
-      "Awesome! That's perfect memory. Go try the next challenge.";
-    scoreText += 10;
-    score.innerText = `Score: ${scoreText}`;
-    // return { attempt, scoreText };
-  } else {
-    attempt.innerText =
-      "Opps, not exactly right. Try the next challenge. You've got this!";
-    // return attempt;
-  }
-}
+//   if (attemptArr.every(checkAttempt) === true) {
+//     attempt.innerText =
+//       "Awesome! That's perfect memory. Go try the next challenge.";
+//     scoreText += 10;
+//     score.innerText = `Score: ${scoreText}`;
+//   } else {
+//     attempt.innerText =
+//       "Opps, not exactly right. Try the next challenge. You've got this!";
+//   }
+// }
 
 document.querySelector("#submit").addEventListener("click", compareResultV2);
 
@@ -247,28 +245,24 @@ function compareResultV2() {
 
   if (attemptArr.every(checkAttempt) === true) {
     attempt.innerText =
-      "Awesome! That's perfect memory. Go try the next challenge.";
+      "Awesome! You've got perfect memory. Try the next challenge and make it perfect too!";
     scoreText += 10;
     score.innerText = `Score: ${scoreText}`;
-    // return { attempt, scoreText };
   } else if (attemptArr.every(checkAttemptCol) === true) {
     attempt.innerText =
-      "Colour perfect! 5 points for that. Just abit more to go for next challenge";
+      "Colour perfect! 5 points for that. Up your number game at the next challenge.";
     scoreText += 5;
     score.innerText = `Score: ${scoreText}`;
   } else if (attemptArr.every(checkAttemptNum) === true) {
     attempt.innerText =
-      "You are good with numbers. 5 points for that.Cant wait to see the colour match for next challenge";
+      "You are good with numbers. 5 points for that. Cant wait to see the colour match for next challenge.";
     scoreText += 5;
     score.innerText = `Score: ${scoreText}`;
   } else {
     attempt.innerText =
       "Opps, not exactly right. Try the next challenge. You've got this!";
-    // return attempt;
   }
 }
-
-// document.querySelector("#submit").addEventListener("click", compareResult);
 
 //Tooltip
 var tooltipTriggerList = [].slice.call(

@@ -15,17 +15,39 @@
 
 #startagain-initial {
   font-size: x-large;
+  /* margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); */
+}
+
+#gamebrief {
+  /* font-size: x-large; */
   margin: 0;
   position: absolute;
   top: 50%;
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+  font-size: large;
+  text-align: center;
+  /* color: darkgray; */
+}
+
+#gamebriefborder {
+  /* border: 1px solid gray; */
+  /* background-color: #b4e7ce; */
+  background-color: #b9f5d8;
+  height: 15em;
+  width: 25em;
+  /* padding: 10px; */
 }
 
 #buttons-top {
   display: flex;
-  justify-content: sp;
+  justify-content: space-evenly;
 }
 
 .buttontop {
@@ -43,6 +65,10 @@ main {
 aside {
   margin-right: 50px;
   width: 150px;
+}
+
+#option {
+  margin-top: 30px;
 }
 
 span {
@@ -67,11 +93,6 @@ li {
 
 #draggreen {
   color: rgb(65, 196, 152);
-}
-
-#reference {
-  color: gray;
-  font-size: small;
 }
 
 /* Squares */
@@ -107,6 +128,7 @@ li {
   flex-direction: row;
   /* justify-content: space-evenly; */
 }
+
 .col-md-2 {
   border: 1px solid black;
   height: 5em;
