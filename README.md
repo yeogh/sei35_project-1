@@ -14,6 +14,7 @@ Accessible via game URL once available.
 ## Unsolved problem/ Enhancement for future releases
 - Increase complexity of the game by adding more boxes, colours or numbers.
 - Add animation effect, background music/sound effect to enhance the experience
+- Make it mobile responsive
 
 
 
