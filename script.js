@@ -322,15 +322,20 @@ function compareResultV3() {
 
   function checkAttemptCol(element) {
     // return element === "correctcol";
-    return element === "correctcol" || "correct";
+    return element === "correctcol" || element === "correct";
   }
 
   function checkAttemptNum(element) {
     // return element === "correctnum" ;
-    return element === "correctnum" || "correct";
+    return element === "correctnum" || element === "correct";
   }
   // console.log(attemptArr);
   // console.log(attemptArr.every(checkAttempt));
+
+  function checkIncorrect(element) {
+    // return element === "correctnum" ;
+    return element === "incorrect";
+  }
 
   if (attemptArr.every(checkAttempt) === true) {
     attempt.innerText =
@@ -347,10 +352,15 @@ function compareResultV3() {
       "You are good with numbers. 5 points for that. Cant wait to see the colour match for next challenge.";
     scoreText += 5;
     score.innerText = `Score: ${scoreText}`;
-  } else {
+  } else if (attemptArr.some(checkIncorrect)) {
     attempt.innerText =
       "Opps, not exactly right. Try the next challenge. You've got this!";
   }
+
+  //   else {
+  //     attempt.innerText =
+  //       "Opps, not exactly right. Try the next challenge. You've got this!";
+  //   }
 }
 
 //   if (scoreText === 10) {
